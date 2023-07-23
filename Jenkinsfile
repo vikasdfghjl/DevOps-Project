@@ -1,6 +1,10 @@
 pipeline {
      
      agent any
+     environment{
+        dockerCredentials = 'docker-creds'
+        dockerImageName = 'vikasdfghjl/todo_app'
+     }
        
       tools{
         dockerTool 'Docker'
@@ -33,10 +37,10 @@ pipeline {
                 steps{
                 script{
                     // this will automatically login into docker
-                    docker.withRegistry('https://index.docker.io/v1/','docker-creds') {
+                    docker.withRegistry('https://index.docker.io/v1/', dockerCredentials) {
 
-                        def dockerImage = docker.build('vikasdfghjl/todo_app:latest')
-
+                        def dockerImage = docker.build(dockerImageName)
+                        
                         dockerImage.push()
                     }
                 }
