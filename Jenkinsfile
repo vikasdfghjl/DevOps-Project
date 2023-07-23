@@ -8,7 +8,7 @@ pipeline {
        
       tools{
         dockerTool 'Docker'
-        nodejs 'Node-18.15.0' 
+        nodejs 'Node-18.16.1' 
      }        
         stages {
             stage("build"){
