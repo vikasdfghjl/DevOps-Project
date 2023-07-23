@@ -2,7 +2,7 @@ pipeline {
      
      agent any
      environment{
-        dockerCredentials = 'docker-login'
+        dockerCredentials = 'docker-creds'
         dockerImageName = 'vikasdfghjl/todo_app'
      }
        
