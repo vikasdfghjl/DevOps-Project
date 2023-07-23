@@ -2,7 +2,7 @@ pipeline {
      
      agent any
      environment{
-        dockerCredentials = 'docker-creds'
+        dockerCredentials = 'docker-login'
         dockerImageName = 'vikasdfghjl/todo_app'
      }
        
@@ -40,7 +40,7 @@ pipeline {
                     docker.withRegistry('https://index.docker.io/v1/', dockerCredentials) {
 
                         def dockerImage = docker.build(dockerImageName)
-                        
+
                         dockerImage.push()
                     }
                 }
