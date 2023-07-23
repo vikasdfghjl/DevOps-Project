@@ -9,3 +9,9 @@ terraform/terraform.tfvars
 
 ### VS Code ###
 .vscode/
+
+### env
+.env
+
+### node.js
+node_modules
