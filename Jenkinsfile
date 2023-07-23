@@ -1,10 +1,11 @@
 pipeline {
      
      agent any
-     environment{
-        dockerCredentials = 'docker-creds'
-        dockerImageName = 'vikasdfghjl/todo_app'
-     }
+     environment {
+        DOCKERHUB_USERNAME = credentials('DOCKERHUB_USERNAME') // Jenkins credential ID for DockerHub username
+        DOCKERHUB_PASSWORD = credentials('DOCKERHUB_PASSWORD') // Jenkins credential ID for DockerHub password
+        DOCKER_IMAGE_NAME = "vikasdfghjl/todo_app"
+    }
        
       tools{
         dockerTool 'Docker'
@@ -37,11 +38,11 @@ pipeline {
                 steps{
                 script{
                     // this will automatically login into docker
-                    docker.withRegistry('https://index.docker.io/v1/', dockerCredentials) {
+                    docker.withRegistry('https://index.docker.io/v1/', DOCKERHUB_USERNAME, DOCKERHUB_PASSWORD) {
 
-                        def dockerImage = docker.build(dockerImageName)
+                        sh "docker build -t ${DOCKER_IMAGE_NAME} ."
 
-                        dockerImage.push()
+                        sh "docker push ${DOCKER_IMAGE_NAME}"
                     }
                 }
               }
