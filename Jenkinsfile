@@ -28,12 +28,7 @@ pipeline {
                 }
             }
 
-            stage("deploy"){
-                steps{
-                    echo 'deploying the application...'
-                    
-                }
-            }
+            
 
             stage("docker build and Push"){
                 steps{
@@ -51,11 +46,29 @@ pipeline {
 
                         
 
-                        sh "docker run -d -p 4000:4000 --name todo_app ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
+                        //sh "docker run -d -p 4000:4000 --name todo_app ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
                         //run jenkinsFile once, till here, after that add the commands below it
                     }
                 }
               }
+            }
+
+            stage("deploy"){
+                steps{
+                    sh "exit"
+                    withCredentials([usernamePassword(credentialsId: 'DOCKERHUB_CREDS', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
+                        
+                        sh '''
+
+                        echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
+
+                        docker run -d -p 4000:4000 --name todo_app ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}
+
+
+                        '''
+                    }
+                    
+                }
             }
             
         }     
