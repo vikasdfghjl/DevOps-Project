@@ -42,7 +42,7 @@ pipeline {
                         //sh "docker build -t ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER} ."
 
                         //sh "docker push ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
-                        app.push("latest")
+                        app.push("${BUILD_NUMBER}")
 
                         
 
@@ -58,16 +58,16 @@ pipeline {
                     sh "exit"
                     withCredentials([usernamePassword(credentialsId: 'DOCKERHUB_CREDS', passwordVariable: 'DOCKERHUB_PASSWORD', usernameVariable: 'DOCKERHUB_USERNAME')]) {
                         
-                        sh '''
+                        
 
-                        echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-                        docker stop todo_app
-                        docker rm todo_app
-                        docker pull vikasdfghjl/todo_app:latest
-                        docker run -d -p 4000:4000 --name todo_app ${DOCKER_IMAGE_NAME}
+                        sh 'echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin'
+                        //docker stop todo_app
+                        //docker rm todo_app
+                        //docker pull vikasdfghjl/todo_app:latest
+                        sh "docker run -d -p 4000:4000 --name todo_app ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
 
 
-                        '''
+                        
                     }
                     
                 }
