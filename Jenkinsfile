@@ -61,7 +61,8 @@ pipeline {
                         sh '''
 
                         echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin
-
+                        docker stop todo_app
+                        docker rm todo_app
                         docker run -d -p 4000:4000 --name todo_app ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}
 
 
