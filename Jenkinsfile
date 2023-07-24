@@ -51,7 +51,7 @@ pipeline {
                         try {
                             sh "docker stop todo_app_project"
                             sh "docker rm todo_app_project"
-                        } catch (){
+                        } catch (Exception ignored){
                             // It's okay if the container doesn't exist
                         }
 
