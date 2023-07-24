@@ -48,7 +48,14 @@ pipeline {
 
                         sh "docker push ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
 
-                        sh "docker run -d -p 4000:4000 --name DevOps_Project ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
+                        try {
+                            sh "docker stop todo_app_project"
+                            sh "docker rm todo_app_project"
+                        } catch (){
+                            // It's okay if the container doesn't exist
+                        }
+
+                        sh "docker run -d -p 4000:4000 --name todo_app_project ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
                         //run jenkinsFile once, till here, after that add the commands below it
                     }
                 }
