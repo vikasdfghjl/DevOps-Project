@@ -44,9 +44,9 @@ pipeline {
                         sh 'echo "$DOCKERHUB_PASSWORD" | docker login -u "$DOCKERHUB_USERNAME" --password-stdin'
 
                         
-                        sh "docker build -t ${DOCKER_IMAGE_NAME} ."
+                        sh "docker build -t ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER} ."
 
-                        sh "docker push ${DOCKER_IMAGE_NAME}"
+                        sh "docker push ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
                     }
                 }
               }
