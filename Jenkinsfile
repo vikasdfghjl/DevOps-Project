@@ -41,13 +41,14 @@ pipeline {
                         def app = docker.build("vikasdfghjl/todo_app")
                         //sh "docker build -t ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER} ."
 
-                        //sh "docker push ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
+                        
                         app.push("${BUILD_NUMBER}")
+                        //sh "docker push ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
 
                         
 
                         //sh "docker run -d -p 4000:4000 --name todo_app ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
-                        //run jenkinsFile once, till here, after that add the commands below it
+                        
                     }
                 }
               }
