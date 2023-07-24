@@ -64,7 +64,7 @@ pipeline {
                         //docker stop todo_app
                         //docker rm todo_app
                         //docker pull vikasdfghjl/todo_app:latest
-                        sh "docker run -d -p 4000:4000 --name todo_app ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
+                        sh "docker run -d -p 4000:4000 ${DOCKER_IMAGE_NAME}:${BUILD_NUMBER}"
 
 
                         
