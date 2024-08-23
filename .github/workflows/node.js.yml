@@ -23,5 +23,7 @@ jobs:
         node-version: ${{ matrix.node-version }}
         cache: 'npm'
     - run: npm ci
-    - name: Run application
-      run: node app.js
+    - name: Restart backend with PM2
+      run: pm2 restart backend
+    - name: Restart Nginx
+      run: sudo systemctl restart nginx
