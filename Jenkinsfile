@@ -9,7 +9,7 @@ pipeline {
     }
        
       tools{
-        dockerTool 'Docker'
+        //dockerTool 'Docker'
         nodejs 'Node-18.16.1' 
      }        
         stages {
