@@ -2,6 +2,7 @@ pipeline {
      
      agent any
      environment {
+        HOME = "${env.WORKSPACE}"
         //DOCKERHUB_CREDS = 'docker-creds'
         //DOCKERHUB_USERNAME = credentials('DOCKERHUB_USERNAME') // Jenkins credential ID for DockerHub username
         //DOCKERHUB_PASSWORD = credentials('DOCKERHUB_PASSWORD') // Jenkins credential ID for DockerHub password
