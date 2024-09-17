@@ -8,7 +8,7 @@ router.post('/to-do', postToDo)
 
 router.get('/to-do', getToDo)
 
-router.get("/delete/to-do/:_id", deleteToDo)
+router.delete("/delete/to-do/:_id", deleteToDo)
 
 
 
